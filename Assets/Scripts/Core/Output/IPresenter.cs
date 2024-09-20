@@ -5,7 +5,7 @@ namespace Assets.Scripts.Core.Output
     public interface IPresenter
     {
         void Notify(BuyIngredientResult buyIngredientResult);
-        void Notify(PrepareDishResult prepareDishResult);
-        void Notify(SellDishResult sellDishResult);
+        void Notify(PrepareMealResult prepareMealResult);
+        void Notify(SellMealResult sellMealResult);
     }
 }

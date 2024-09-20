@@ -3,14 +3,14 @@ using System.Collections.Generic;
 
 namespace Assets.Scripts.Core.UseCases
 {
-    public class PrepareDishResult
+    public class PrepareMealResult
     {
         public bool IsSucces { get; }
-        public List<Recipe> Dishes { get; }
-        public PrepareDishResult(bool isSucces, List<Recipe> dishes)
+        public List<Recipe> Meals { get; }
+        public PrepareMealResult(bool isSucces, List<Recipe> meals)
         {
             IsSucces = isSucces;
-            Dishes = dishes;
+            Meals = meals;
         }
     }
 

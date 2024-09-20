@@ -1,9 +1,9 @@
 ﻿namespace Assets.Scripts.Core.UseCases
 {
-    public class SellDishRequest
+    public class SellMealRequest
     {
         public int Id { get; }
-        public SellDishRequest(int id)
+        public SellMealRequest(int id)
         {
             Id = id;
         }

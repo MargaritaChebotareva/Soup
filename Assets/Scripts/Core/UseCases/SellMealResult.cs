@@ -2,14 +2,14 @@
 
 namespace Assets.Scripts.Core.UseCases
 {
-    public class SellDishResult
+    public class SellMealResult
     {
         public bool IsSucces { get; }
-        public Recipe Dish { get; }
-        public SellDishResult(bool isSucces, Recipe dish)
+        public Recipe Meal { get; }
+        public SellMealResult(bool isSucces, Recipe meal)
         {
             IsSucces = isSucces;
-            Dish = dish;
+            Meal = meal;
         }
     }
 }

@@ -5,11 +5,11 @@ using System.Collections.Generic;
 
 namespace Assets.Scripts.Core.UseCases
 {
-    public class PrepareDish
+    public class PrepareMeal
     {
         private IUserRepository userRepository;
         private IPresenter presenter;
-        public PrepareDish(IUserRepository userRepository, IPresenter presenter)
+        public PrepareMeal(IUserRepository userRepository, IPresenter presenter)
         {
             this.userRepository = userRepository;
             this.presenter = presenter;
@@ -20,17 +20,17 @@ namespace Assets.Scripts.Core.UseCases
             var user = userRepository.GetUser();
             var recipes = user.AvailableRecipes;
 
-            List<Recipe> dishes = new List<Recipe>();
+            List<Recipe> meals = new List<Recipe>();
 
             foreach (var recipe in recipes)
             {
                 if (TryPrepare(user, recipe))
                 {
-                    dishes.Add(recipe);
+                    meals.Add(recipe);
                 }
             }
             userRepository.UpdateUser(user);
-            presenter.Notify(dishes.Count > 0 ? new PrepareDishResult(true, dishes) : new PrepareDishResult(false, null));
+            presenter.Notify(meals.Count > 0 ? new PrepareMealResult(true, meals) : new PrepareMealResult(false, null));
         }
 
         private bool TryPrepare(User user, Recipe recipe)

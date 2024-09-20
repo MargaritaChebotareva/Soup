@@ -7,7 +7,7 @@ namespace Assets.Scripts.Core.Entities
         public int Money { get; private set; }
         public List<Ingredient> Ingredients { get; private set; }
         public List<Recipe> AvailableRecipes { get; private set; }
-        public List<Recipe> ReadyDishes { get; private set; }
+        public List<Recipe> Meals { get; private set; }
 
         public void AddMoney(int money)
         {
