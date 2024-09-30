@@ -6,33 +6,49 @@ using UnityEngine;
 
 namespace Assets.Scripts.Editor
 {
-    [CustomEditor(typeof(IngredientPack))]
-    public class IngredientPackEditor : UnityEditor.Editor
+    [CustomPropertyDrawer(typeof(IngredientsList))]
+    public class IngredientsListEditor : PropertyDrawer
     {
-        private const float spaceBetweenLists = 20;
         private const float spaceBetweenRows = 2;
         private const float dropDownWidth = 160;
         private const float horizontalSpace = 5;
         private const float labelWidth = 50;
-        private const float rightShift = 40;
 
         private ReorderableList list;
-        private SerializedProperty ingredientTypesProp;
+        private SerializedProperty typesProp;
         private string[] ingredientNames;
+        bool wasInsert = false;
 
-        public void OnEnable()
+        public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
         {
-            ingredientTypesProp = serializedObject.FindProperty("ingredientTypes");
-            list = new ReorderableList(serializedObject, serializedObject.FindProperty("startPack"), true, true, true, true);
+            if (list == null)
+            {
+                Init(property);
+            }
 
+            if (list != null)
+            {
+                list.DoLayoutList();
+            }
+        }
+
+        public void Init(SerializedProperty property)
+        {
+            typesProp = property.FindPropertyRelative("types");
+            UpdateIngredientNames();
+            list = new ReorderableList(property.serializedObject, property.FindPropertyRelative("items"), true, true, true, true);
             list.drawHeaderCallback = (Rect rect) =>
             {
-                EditorGUI.LabelField(rect, "Start Pack");
+                EditorGUI.LabelField(rect, "Items");
             };
 
             list.drawElementCallback = (Rect rect, int index, bool isActive, bool isFocused) =>
             {
-                if (ingredientNames.Length == 0) return;
+                if (ingredientNames == null || ingredientNames.Length == 0)
+                {
+                    UpdateIngredientNames();
+                    if (ingredientNames == null || ingredientNames.Length == 0) return;
+                }
 
                 var element = list.serializedProperty.GetArrayElementAtIndex(index);
                 var propertyName = element.FindPropertyRelative("name");
@@ -50,25 +66,23 @@ namespace Assets.Scripts.Editor
 
                 float countFieldX = labelX + labelWidth + horizontalSpace;
 
-                EditorGUI.PropertyField(new Rect(countFieldX, rect.y, rect.width - countFieldX + rightShift, EditorGUIUtility.singleLineHeight), 
+                EditorGUI.PropertyField(new Rect(countFieldX, rect.y, rect.width - countFieldX, EditorGUIUtility.singleLineHeight),
                     element.FindPropertyRelative("count"), GUIContent.none);
             };
+
         }
 
-
-        public override void OnInspectorGUI()
+        private void UpdateIngredientNames()
         {
-            serializedObject.Update();
-            EditorGUILayout.PropertyField(ingredientTypesProp, true);
-            var ingredientPack = serializedObject.targetObject as IngredientPack;
-            ingredientNames = ingredientPack.GetAllIngredients();
-            EditorGUILayout.Space(spaceBetweenLists);
-            list.DoLayoutList();
-            serializedObject.ApplyModifiedProperties();
-
+            if (typesProp != null && typesProp.boxedValue != null)
+            {
+                var types = typesProp.boxedValue as IngredientTypeSet;
+                if (types != null)
+                {
+                    ingredientNames = types.GetAllIngredients();
+                }
+            }
         }
-
     }
-
 }
 

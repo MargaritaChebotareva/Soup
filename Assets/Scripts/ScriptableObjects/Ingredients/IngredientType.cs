@@ -4,7 +4,7 @@ using UnityEngine;
 namespace Assets.Scripts.ScriptableObjects.Ingredients
 {
     [Serializable]
-    public class EditorIngredientType
+    public class IngredientType
     {
         [SerializeField] private string name;
         [SerializeField] private int pricePerUnit;
