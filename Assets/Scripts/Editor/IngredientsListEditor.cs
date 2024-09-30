@@ -17,7 +17,6 @@ namespace Assets.Scripts.Editor
         private ReorderableList list;
         private SerializedProperty typesProp;
         private string[] ingredientNames;
-        bool wasInsert = false;
 
         public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
         {
