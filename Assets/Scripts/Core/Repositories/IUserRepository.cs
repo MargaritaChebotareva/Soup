@@ -1,10 +1,13 @@
-using Assets.Scripts.Core.Entities;
+﻿using Assets.Scripts.Core.Entities;
 
 namespace Assets.Scripts.Core.Repositories
 {
     public interface IUserRepository
     {
-        User GetUser();
-        void UpdateUser(User user);
+        User Create(int money);
+
+        void Update(User user);
+
+        User Get();
     }
 }

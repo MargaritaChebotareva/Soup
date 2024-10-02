@@ -9,9 +9,11 @@ namespace Assets.Scripts.ScriptableObjects.Ingredients
         [SerializeField] private string name;
         [SerializeField] private int pricePerUnit;
 
-        public string GetName()
+        public string Name => name;
+
+        public int GetPricePerUnit()
         {
-            return name;
+            return pricePerUnit;
         }
     }
 }

@@ -2,16 +2,14 @@
 
 namespace Assets.Scripts.Core.UseCases
 {
-    public class BuyIngredientResult
+    public class BuyIngredientResponse : BaseResponse
     {
-        public bool IsSucces { get; }
         public User User { get; }
 
         public Ingredient Ingredient { get; }
 
-        public BuyIngredientResult(bool isSuccess, User user, Ingredient ingredient)
+        public BuyIngredientResponse(bool isSuccess, User user, Ingredient ingredient) : base(isSuccess)
         {
-            IsSucces = isSuccess;
             User = user;
             Ingredient = ingredient;
         }

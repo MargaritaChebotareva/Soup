@@ -6,29 +6,30 @@ namespace Assets.Scripts.Core.UseCases
     public class BuyIngredient
     {
         private IUserRepository userRepository;
-        private IMarketplaceRepository marketplaceRepository;
+        private IIngredientRepository ingredientRepository;
         private IPresenter presenter;
-        public BuyIngredient(IUserRepository userRepository, IMarketplaceRepository marketplaceRepository, IPresenter presenter)
+        public BuyIngredient(IUserRepository userRepository, IIngredientRepository ingredientRepository, IPresenter presenter)
         {
             this.userRepository = userRepository;
-            this.marketplaceRepository = marketplaceRepository;
+            this.ingredientRepository = ingredientRepository;
             this.presenter = presenter;
         }
 
         public void Execute(BuyIngredientRequest request)
         {
-            var user = userRepository.GetUser();
-            var ingredient = marketplaceRepository.GetIngredient(request.Id);
+            var user = userRepository.Get();
+            var ingredient = ingredientRepository.GetIngredient(request.Id);
             if (user.Money < ingredient.Price)
             {
-                presenter.Notify(new BuyIngredientResult(false, null, null));
+                presenter.Notify(new BuyIngredientResponse(false, null, null));
                 return;
             }
             user.RemoveMoney(ingredient.Price);
-            user.Ingredients.Add(ingredient);
+            ingredient.SetOwner(Entities.Owner.User);
 
-            userRepository.UpdateUser(user);
-            presenter.Notify(new BuyIngredientResult(true, user, ingredient));
+            userRepository.Update(user);
+            ingredientRepository.UpdateIngredient(ingredient);
+            presenter.Notify(new BuyIngredientResponse(true, user, ingredient));
         }
     }
 }

@@ -7,69 +7,65 @@ namespace Assets.Scripts.Core.UseCases
 {
     public class PrepareMeal
     {
-        private IUserRepository userRepository;
+        private IIngredientRepository ingredientRepository;
+        private IRecipeRepository recipeRepository;
         private IPresenter presenter;
-        public PrepareMeal(IUserRepository userRepository, IPresenter presenter)
+        public PrepareMeal(IPresenter presenter, IRecipeRepository recipeRepository, IIngredientRepository ingredientRepository)
         {
-            this.userRepository = userRepository;
             this.presenter = presenter;
+            this.recipeRepository = recipeRepository;
+            this.ingredientRepository = ingredientRepository;
         }
 
         public void Execute()
         {
-            var user = userRepository.GetUser();
-            var recipes = user.AvailableRecipes;
-
-            List<Recipe> meals = new List<Recipe>();
+            var recipes = recipeRepository.GetRecipes();
+            var countBefore = recipeRepository.GetMealCount();
 
             foreach (var recipe in recipes)
             {
-                if (TryPrepare(user, recipe))
+                if (CanPrepare(recipe.Composition))
                 {
-                    meals.Add(recipe);
+                    recipeRepository.AddMeal(recipe);
+                    for (int i = 0; i < recipe.Composition.Length; i++)
+                    {
+                        for (int k = 0; k < recipe.Composition[i].Count; k++)
+                            ingredientRepository.RemoveAny(recipe.Composition[i].Name);
+                    }
                 }
             }
-            userRepository.UpdateUser(user);
-            presenter.Notify(meals.Count > 0 ? new PrepareMealResult(true, meals) : new PrepareMealResult(false, null));
+            var countAfter = recipeRepository.GetMealCount();
+
+            presenter.Notify(countBefore < countAfter ? new PrepareMealResponse(true, recipeRepository.GetMeals()) : new PrepareMealResponse(false, null));
         }
 
-        private bool TryPrepare(User user, Recipe recipe)
+        private bool CanPrepare(IngredientAmount[] composition)
         {
             Dictionary<string, int> ingredients = new Dictionary<string, int>();
-            foreach (RecipePair recipePair in recipe.Composition)
+            foreach (var ingredientAmount in composition)
             {
-                var key = recipePair.Ingredient.Name;
+                var key = ingredientAmount.Name;
                 if (ingredients.ContainsKey(key))
                 {
-                    ingredients[key] += recipePair.Count;
+                    ingredients[key] += ingredientAmount.Count;
                 }
                 else
                 {
-                    ingredients[key] = recipePair.Count;
+                    ingredients[key] = ingredientAmount.Count;
                 }
             }
+
             var keys = ingredients.Keys;
 
             foreach (var key in keys)
             {
-                var count = user.Ingredients.FindAll(x => x.Name == key).Count;
+                var count = ingredientRepository.GetIngredients(key).Length;
                 if (count < ingredients[key])
                 {
                     return false;
                 }
             }
-
-            foreach (var key in keys)
-            {
-                while (ingredients[key] > 0)
-                {
-                    var index = user.Ingredients.FindIndex(x => x.Name == key);
-                    user.Ingredients.RemoveAt(index);
-                    ingredients[key]--;
-                }
-            }
             return true;
-
         }
 
     }

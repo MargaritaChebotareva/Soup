@@ -8,9 +8,13 @@ namespace Assets.Scripts.ScriptableObjects.Ingredients
     public class IngredientTypeSet : ScriptableObject
     {
         [SerializeField] private List<IngredientType> ingredientTypes = new();
-        public string[] GetAllIngredients()
+        public string[] GetNames()
         {
-            return ingredientTypes.Select(x => x.GetName()).ToArray();
+            return ingredientTypes.Select(x => x.Name).ToArray();
+        }
+        public int GetPrice(string name)
+        {
+            return ingredientTypes.Find(x=>x.Name == name).GetPricePerUnit();
         }
     }
 }

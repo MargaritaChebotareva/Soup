@@ -78,7 +78,7 @@ namespace Assets.Scripts.Editor
                 var types = typesProp.boxedValue as IngredientTypeSet;
                 if (types != null)
                 {
-                    ingredientNames = types.GetAllIngredients();
+                    ingredientNames = types.GetNames();
                 }
             }
         }

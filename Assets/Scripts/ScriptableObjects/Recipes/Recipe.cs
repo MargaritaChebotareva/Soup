@@ -11,9 +11,17 @@ namespace Assets.Scripts.ScriptableObjects.Recipes
         [SerializeField] private int price;
         [SerializeField] IngredientsList items;
 
+        public string Name => name;
+        public int Price => price;
+
         public void SetIngredientsSet(IngredientTypeSet types)
         {
             items.SetTypes(types);
+        }
+
+        public Core.Entities.Ingredient[] GetIngredients()
+        {
+            return items.GetIngredients();
         }
     }
 }

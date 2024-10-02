@@ -10,7 +10,15 @@ namespace Assets.Scripts.ScriptableObjects.Ingredients
 
         public void OnValidate()
         {
-            if (types != null) { startingItems.SetTypes(types); }
+            if (types != null)
+            {
+                startingItems.SetTypes(types);
+            }
+        }
+
+        public Core.Entities.Ingredient[] GetIngredients()
+        {
+            return startingItems.GetIngredients();
         }
     }
 }

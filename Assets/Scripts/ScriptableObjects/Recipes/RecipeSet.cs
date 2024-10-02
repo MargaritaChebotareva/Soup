@@ -8,7 +8,7 @@ namespace Assets.Scripts.ScriptableObjects.Recipes
     public class RecipeSet : ScriptableObject
     {
         [SerializeField] private IngredientTypeSet ingredients;
-        [SerializeField] private List<Recipe> recipes = new List<Recipe>();
+        [SerializeField] private List<Recipe> recipes = new ();
 
         public void OnValidate()
         {
@@ -17,6 +17,23 @@ namespace Assets.Scripts.ScriptableObjects.Recipes
             {
                 item.SetIngredientsSet(ingredients);
             }
+        }
+
+        public Core.Entities.Recipe[] GetRecipes()
+        {
+            List<Core.Entities.Recipe> result = new(recipes.Count);
+            foreach (var item in recipes)
+            {
+                var ingredients = item.GetIngredients();
+                var IngredientAmounts = new Core.Entities.IngredientAmount[ingredients.Length];
+                for (int i = 0; i < IngredientAmounts.Length; i++)
+                {
+                    IngredientAmounts[i] = new(ingredients[i].Name, 1);
+                }
+                var recipe = new Core.Entities.Recipe(item.Name, IngredientAmounts, item.Price);
+                result.Add(recipe);
+            }
+            return result.ToArray();
         }
     }
 }

@@ -9,5 +9,7 @@ namespace Assets.Scripts.ScriptableObjects.Ingredients
         [SerializeField] private string name;
         [Min(1)]
         [SerializeField] private int count;
+        public string Name => name;
+        public int Count => count;
     }
 }
