@@ -10,10 +10,6 @@ namespace Assets.Scripts.ScriptableObjects.Ingredients
         [SerializeField] private int pricePerUnit;
 
         public string Name => name;
-
-        public int GetPricePerUnit()
-        {
-            return pricePerUnit;
-        }
+        public int Price => pricePerUnit;
     }
 }

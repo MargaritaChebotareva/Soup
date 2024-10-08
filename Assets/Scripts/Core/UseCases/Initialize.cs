@@ -20,7 +20,7 @@ namespace Assets.Scripts.Core.UseCases
         public void Execute(InitializeRequest request)
         {
             var user = userRepository.Create(request.Money);
-            ingredientRepository.AddIngredientNames(request.IngredientNames);
+            ingredientRepository.AddIngredientTypes(request.IngredientTypes);
             ingredientRepository.AddIngredients(request.Ingredients, Owner.User);
             recipeRepository.AddRecipes(request.Recipes);
             presenter.Notify(new InitializeResponse(true));

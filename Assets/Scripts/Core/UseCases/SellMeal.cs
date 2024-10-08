@@ -24,7 +24,7 @@ namespace Assets.Scripts.Core.UseCases
             user.AddMoney(price);
 
             userRepository.Update(user);
-            presenter.Notify(new SellMealResponse(true, recipeRepository.GetMeals()));
+            presenter.Notify(new SellMealResponse(true, userRepository.Get().Money, recipeRepository.GetMeals()));
         }
     }
 }

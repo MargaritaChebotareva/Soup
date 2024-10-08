@@ -20,10 +20,9 @@ namespace Assets.Scripts.ScriptableObjects.Ingredients
             List<Core.Entities.Ingredient> list = new List<Core.Entities.Ingredient>(items.Count);
             foreach (var item in items)
             {
-                var price = types.GetPrice(item.Name);
                 for (int i = 0; i < item.Count; i++)
                 {
-                    list.Add(new Core.Entities.Ingredient(0, item.Name, price));
+                    list.Add(new Core.Entities.Ingredient(0, item.Name));
                 }
             }
             return list.ToArray();

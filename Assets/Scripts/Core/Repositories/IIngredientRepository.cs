@@ -6,22 +6,24 @@ namespace Assets.Scripts.Core.Repositories
     {
         Ingredient GetIngredient(int id);
 
-        void Remove(int id);
-
-        void RemoveAny(string name);
-
         Ingredient[] GetIngredients(string name);
 
         Ingredient[] GetIngredients();
 
         void UpdateIngredient(Ingredient ingredient);
 
-        void AddIngredient(string name, int price, Owner owner);
+        void AddIngredient(string name, Owner owner);
 
         void AddIngredients(Ingredient[] ingredients, Owner owner);
 
-        void AddIngredientNames(string[] names);
+        void Remove(int id);
 
-        string[] GetIngredientsNames();
+        void RemoveAny(string name);
+
+        void AddIngredientTypes(IngredientType[] types);
+
+        IngredientType[] GetIngredientTypes();
+
+        IngredientType GetIngredientType(string name);
     }
 }

@@ -19,12 +19,13 @@ namespace Assets.Scripts.Core.UseCases
         {
             var user = userRepository.Get();
             var ingredient = ingredientRepository.GetIngredient(request.Id);
-            if (user.Money < ingredient.Price)
+            var ingredientType = ingredientRepository.GetIngredientType(ingredient.Name);
+            if (user.Money < ingredientType.Price)
             {
                 presenter.Notify(new BuyIngredientResponse(false, null, null));
                 return;
             }
-            user.RemoveMoney(ingredient.Price);
+            user.RemoveMoney(ingredientType.Price);
             ingredient.SetOwner(Entities.Owner.User);
 
             userRepository.Update(user);

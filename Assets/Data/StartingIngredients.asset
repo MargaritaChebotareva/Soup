@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1bfb578cad846d2428839b12b42cba43, type: 3}
+  m_Name: StartingIngredients
+  m_EditorClassIdentifier: 
+  types: {fileID: 11400000, guid: f8ef1a176b2431e4397c87a58b334707, type: 2}
+  startingItems:
+    types: {fileID: 11400000, guid: f8ef1a176b2431e4397c87a58b334707, type: 2}
+    items:
+    - name: Shark
+      count: 3
+    - name: Water
+      count: 10
+    - name: Salt
+      count: 2

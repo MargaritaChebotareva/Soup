@@ -12,9 +12,9 @@ namespace Assets.Scripts.ScriptableObjects.Ingredients
         {
             return ingredientTypes.Select(x => x.Name).ToArray();
         }
-        public int GetPrice(string name)
+        public Core.Entities.IngredientType[] GetTypes()
         {
-            return ingredientTypes.Find(x=>x.Name == name).GetPricePerUnit();
+            return ingredientTypes.Select(x => new Core.Entities.IngredientType(x.Name, x.Price)).ToArray();
         }
     }
 }
