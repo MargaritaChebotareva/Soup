@@ -1,5 +1,7 @@
 ﻿using Assets.Scripts.Core.Output;
 using Assets.Scripts.Core.Repositories;
+using Assets.Scripts.Core.UseCases.Requests;
+using Assets.Scripts.Core.UseCases.Responses;
 
 namespace Assets.Scripts.Core.UseCases
 {

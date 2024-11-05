@@ -1,4 +1,5 @@
-﻿using Assets.Scripts.ScriptableObjects.Ingredients;
+﻿using Assets.Scripts.ScriptableObjects;
+using Assets.Scripts.ScriptableObjects.Common;
 using System;
 using UnityEditor;
 using UnityEditorInternal;
@@ -33,7 +34,7 @@ namespace Assets.Scripts.Editor
 
         public void Init(SerializedProperty property)
         {
-            typesProp = property.FindPropertyRelative("types");
+            typesProp = property.FindPropertyRelative("ingredients");
             UpdateIngredientNames();
             list = new ReorderableList(property.serializedObject, property.FindPropertyRelative("items"), true, true, true, true);
             list.drawHeaderCallback = (Rect rect) =>
@@ -75,7 +76,7 @@ namespace Assets.Scripts.Editor
         {
             if (typesProp != null && typesProp.boxedValue != null)
             {
-                var types = typesProp.boxedValue as IngredientTypeSet;
+                var types = typesProp.boxedValue as Ingredients;
                 if (types != null)
                 {
                     ingredientNames = types.GetNames();

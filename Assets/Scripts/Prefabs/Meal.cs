@@ -1,6 +1,7 @@
 using Assets.Scripts.Controllers;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using Zenject;
 
 namespace Assets.Scripts.Prefabs
 {
@@ -8,9 +9,14 @@ namespace Assets.Scripts.Prefabs
     {
         private MealController mealController;
         private int id;
-        public void Init(MealController mealController, int id)
+
+        [Inject]
+        public void Inject(MealController mealController)
         {
             this.mealController = mealController;
+        }
+        public void Init(int id)
+        {
             this.id = id;
         }
 

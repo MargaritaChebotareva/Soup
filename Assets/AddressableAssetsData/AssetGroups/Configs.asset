@@ -16,27 +16,7 @@ MonoBehaviour:
   m_Data:
     m_SerializedData: []
   m_GUID: c5539c7b17340f84dac2c1a8d8382205
-  m_SerializeEntries:
-  - m_GUID: f8ef1a176b2431e4397c87a58b334707
-    m_Address: Assets/Data/IngredientTypeSet.asset
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: f49e1a475fdb33c42afe9824bd5d7faa
-    m_Address: Assets/Data/RecipeSet.asset
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 748b4c9b59a6fff4aad7a6c1171ecc55
-    m_Address: Assets/Data/StartingIngredients.asset
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: abbe508edea3eee4b8bb9ef087b3e942
-    m_Address: Assets/Data/UserStartingValues.asset
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
+  m_SerializeEntries: []
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 6168231a22c97634b92494744db17971, type: 2}
   m_SchemaSet:

@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 18f69e8a91d9bb34ab7ca7f386ff5819, type: 3}
+  m_Name: Meals
+  m_EditorClassIdentifier: 
+  ingredients: {fileID: 11400000, guid: 597ab1fa6de75894bbbe7bb081f43a95, type: 2}
+  meals:
+  - name: Shark soup
+    price: 150
+    items:
+      ingredients: {fileID: 11400000, guid: 597ab1fa6de75894bbbe7bb081f43a95, type: 2}
+      items:
+      - name: Shark
+        count: 2
+      - name: Water
+        count: 1
+      - name: Salt
+        count: 3
+    prefab: {fileID: 3171229147688852500, guid: fdbc59299e442ba458e0a9c911b96648, type: 3}

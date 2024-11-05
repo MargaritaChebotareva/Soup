@@ -1,25 +1,21 @@
-﻿using Assets.Scripts.Core.Output;
-using Assets.Scripts.Core.Repositories;
-using Assets.Scripts.Core.UseCases;
+﻿using Assets.Scripts.Core.UseCases;
+using UnityEngine;
 
 namespace Assets.Scripts.Controllers
 {
     public class LeverController
     {
-        private IRecipeRepository recipeRepository;
-        private IIngredientRepository ingredientRepository;
-        private IPresenter presenter;
+        private PrepareMeal prepareMeal;
 
-        public LeverController(IRecipeRepository recipeRepository, IIngredientRepository ingredientRepository, IPresenter presenter)
+        public LeverController(PrepareMeal prepareMeal)
         {
-            this.recipeRepository = recipeRepository;
-            this.ingredientRepository = ingredientRepository;
-            this.presenter = presenter;
+            this.prepareMeal = prepareMeal;
+
+            Debug.Log($"{nameof(LeverController)} was created");
         }
 
         public void ClickOnLever()
         {
-            var prepareMeal = new PrepareMeal(presenter, recipeRepository, ingredientRepository);
             prepareMeal.Execute();
         }
     }

@@ -1,6 +1,7 @@
 using Assets.Scripts.Core.Entities;
 using Assets.Scripts.Core.Output;
 using Assets.Scripts.Core.Repositories;
+using Assets.Scripts.Core.UseCases.Responses;
 using System.Collections.Generic;
 
 namespace Assets.Scripts.Core.UseCases

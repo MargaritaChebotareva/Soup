@@ -1,25 +1,21 @@
-﻿using Assets.Scripts.Core.Output;
-using Assets.Scripts.Core.Repositories;
-using Assets.Scripts.Core.UseCases;
+﻿using Assets.Scripts.Core.UseCases;
+using Assets.Scripts.Core.UseCases.Requests;
+using UnityEngine;
 
 namespace Assets.Scripts.Controllers
 {
     public class MealController
     {
-        private IUserRepository userRepository;
-        private IRecipeRepository recipeRepository;
-        private IPresenter presenter;
+        private SellMeal sellMeal;
 
-        public MealController(IUserRepository userRepository, IRecipeRepository recipeRepository, IPresenter presenter)
+        public MealController(SellMeal sellMeal)
         {
-            this.userRepository = userRepository;
-            this.recipeRepository = recipeRepository;
-            this.presenter = presenter;
+            this.sellMeal = sellMeal;
+            Debug.Log($"{nameof(MealController)} was created");
         }
 
         public void ClickOnMeal(int id)
         {
-            var sellMeal = new SellMeal(presenter, userRepository, recipeRepository);
             sellMeal.Execute(new SellMealRequest(id));
         }
     }

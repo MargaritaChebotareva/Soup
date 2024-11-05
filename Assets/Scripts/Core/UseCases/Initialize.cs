@@ -1,17 +1,15 @@
 ﻿using Assets.Scripts.Core.Entities;
-using Assets.Scripts.Core.Output;
 using Assets.Scripts.Core.Repositories;
+using Assets.Scripts.Core.UseCases.Requests;
 
 namespace Assets.Scripts.Core.UseCases
 {
     public class Initialize
     {
-        private IPresenter presenter;
         private IUserRepository userRepository;
         private IIngredientRepository ingredientRepository;
         private IRecipeRepository recipeRepository;
-        public Initialize(IPresenter presenter, IUserRepository userRepository, IIngredientRepository ingredientRepository, IRecipeRepository recipeRepository) {
-            this.presenter = presenter;
+        public Initialize(IUserRepository userRepository, IIngredientRepository ingredientRepository, IRecipeRepository recipeRepository) {
             this.userRepository = userRepository;
             this.ingredientRepository = ingredientRepository;
             this.recipeRepository = recipeRepository;
@@ -19,11 +17,10 @@ namespace Assets.Scripts.Core.UseCases
 
         public void Execute(InitializeRequest request)
         {
-            var user = userRepository.Create(request.Money);
+            userRepository.Create(request.Money);
             ingredientRepository.AddIngredientTypes(request.IngredientTypes);
-            ingredientRepository.AddIngredients(request.Ingredients, Owner.User);
+            ingredientRepository.AddIngredients(request.Ingredients, Owner.None);
             recipeRepository.AddRecipes(request.Recipes);
-            presenter.Notify(new InitializeResponse(true));
         }
     }
 }
