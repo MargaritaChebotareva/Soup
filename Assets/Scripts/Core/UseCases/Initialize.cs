@@ -8,11 +8,11 @@ namespace Assets.Scripts.Core.UseCases
     {
         private IUserRepository userRepository;
         private IIngredientRepository ingredientRepository;
-        private IRecipeRepository recipeRepository;
-        public Initialize(IUserRepository userRepository, IIngredientRepository ingredientRepository, IRecipeRepository recipeRepository) {
+        private IMealRepository mealRepository;
+        public Initialize(IUserRepository userRepository, IIngredientRepository ingredientRepository, IMealRepository mealRepository) {
             this.userRepository = userRepository;
             this.ingredientRepository = ingredientRepository;
-            this.recipeRepository = recipeRepository;
+            this.mealRepository = mealRepository;
         }
 
         public void Execute(InitializeRequest request)
@@ -20,7 +20,7 @@ namespace Assets.Scripts.Core.UseCases
             userRepository.Create(request.Money);
             ingredientRepository.AddIngredientTypes(request.IngredientTypes);
             ingredientRepository.AddIngredients(request.Ingredients, Owner.None);
-            recipeRepository.AddRecipes(request.Recipes);
+            mealRepository.AddRecipes(request.Recipes);
         }
     }
 }

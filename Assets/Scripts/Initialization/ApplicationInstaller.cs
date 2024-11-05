@@ -36,7 +36,7 @@ namespace Assets.Scripts.Initialization
         {
             Container.Bind<IUserRepository>().To<UserRepository>().AsSingle();
             Container.Bind<IIngredientRepository>().To<IngredientRepository>().AsSingle();
-            Container.Bind<IRecipeRepository>().To<RecipeRepository>().AsSingle();
+            Container.Bind<IMealRepository>().To<MealRepository>().AsSingle();
         }
 
         private void BindUseCases()

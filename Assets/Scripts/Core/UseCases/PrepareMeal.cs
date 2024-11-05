@@ -9,25 +9,25 @@ namespace Assets.Scripts.Core.UseCases
     public class PrepareMeal
     {
         private IIngredientRepository ingredientRepository;
-        private IRecipeRepository recipeRepository;
+        private IMealRepository mealRepository;
         private IPresenter presenter;
-        public PrepareMeal(IPresenter presenter, IRecipeRepository recipeRepository, IIngredientRepository ingredientRepository)
+        public PrepareMeal(IPresenter presenter, IMealRepository mealRepository, IIngredientRepository ingredientRepository)
         {
             this.presenter = presenter;
-            this.recipeRepository = recipeRepository;
+            this.mealRepository = mealRepository;
             this.ingredientRepository = ingredientRepository;
         }
 
         public void Execute()
         {
-            var recipes = recipeRepository.GetRecipes();
-            var countBefore = recipeRepository.GetMealCount();
+            var recipes = mealRepository.GetRecipes();
+            var countBefore = mealRepository.GetMealCount();
 
             foreach (var recipe in recipes)
             {
                 if (CanPrepare(recipe.Composition))
                 {
-                    recipeRepository.AddMeal(recipe);
+                    mealRepository.AddMeal(recipe);
                     for (int i = 0; i < recipe.Composition.Length; i++)
                     {
                         for (int k = 0; k < recipe.Composition[i].Count; k++)
@@ -35,9 +35,9 @@ namespace Assets.Scripts.Core.UseCases
                     }
                 }
             }
-            var countAfter = recipeRepository.GetMealCount();
+            var countAfter = mealRepository.GetMealCount();
 
-            presenter.Notify(countBefore < countAfter ? new PrepareMealResponse(true, recipeRepository.GetMeals()) : new PrepareMealResponse(false, null));
+            presenter.Notify(countBefore < countAfter ? new PrepareMealResponse(true, mealRepository.GetMeals()) : new PrepareMealResponse(false, null));
         }
 
         private bool CanPrepare(IngredientAmount[] composition)

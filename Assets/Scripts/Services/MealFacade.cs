@@ -5,15 +5,15 @@ namespace Assets.Scripts.Services
 {
     public class MealFacade
     {
-        private IRecipeRepository recipeRepository;
-        public MealFacade(IRecipeRepository recipeRepository)
+        private IMealRepository mealRepository;
+        public MealFacade(IMealRepository mealRepository)
         {
-            this.recipeRepository = recipeRepository;
+            this.mealRepository = mealRepository;
         }
 
         public Meal[] GetMeals()
         {
-            return recipeRepository.GetMeals();
+            return mealRepository.GetMeals();
         }
     }
 }

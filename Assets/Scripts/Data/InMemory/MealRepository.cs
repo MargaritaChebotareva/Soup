@@ -5,7 +5,7 @@ using System.Linq;
 
 namespace Assets.Scripts.Data.InMemory
 {
-    public class RecipeRepository : IRecipeRepository
+    public class MealRepository : IMealRepository
     {
         private Dictionary<string, Recipe> recipes = new();
         private Dictionary<int, Meal> meals = new();

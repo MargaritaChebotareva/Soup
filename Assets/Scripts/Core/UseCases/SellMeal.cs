@@ -8,25 +8,25 @@ namespace Assets.Scripts.Core.UseCases
     public class SellMeal
     {
         private IUserRepository userRepository;
-        private IRecipeRepository recipeRepository;
+        private IMealRepository mealRepository;
         private IPresenter presenter;
-        public SellMeal(IPresenter presenter, IUserRepository userRepository, IRecipeRepository recipeRepository)
+        public SellMeal(IPresenter presenter, IUserRepository userRepository, IMealRepository mealRepository)
         {
             this.presenter = presenter;
             this.userRepository = userRepository;
-            this.recipeRepository = recipeRepository;   
+            this.mealRepository = mealRepository;   
         }
         public void Execute(SellMealRequest request)
         {
             var user = userRepository.Get();
 
-            var meal = recipeRepository.GetMeal(request.Id);
-            var price = recipeRepository.GetRecipe(meal.Name).Price;
-            recipeRepository.RemoveMeal(request.Id);
+            var meal = mealRepository.GetMeal(request.Id);
+            var price = mealRepository.GetRecipe(meal.Name).Price;
+            mealRepository.RemoveMeal(request.Id);
             user.AddMoney(price);
 
             userRepository.Update(user);
-            presenter.Notify(new SellMealResponse(true, userRepository.Get().Money, recipeRepository.GetMeals()));
+            presenter.Notify(new SellMealResponse(true, userRepository.Get().Money, mealRepository.GetMeals()));
         }
     }
 }

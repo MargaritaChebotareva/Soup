@@ -2,7 +2,7 @@
 
 namespace Assets.Scripts.Core.Repositories
 {
-    public interface IRecipeRepository
+    public interface IMealRepository
     {
         Recipe GetRecipe(string name);
 
