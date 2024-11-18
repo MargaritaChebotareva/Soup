@@ -1,6 +1,7 @@
 ﻿using Assets.Scripts.ScriptableObjects;
 using Assets.Scripts.ScriptableObjects.Common;
 using System;
+using System.Collections.Generic;
 using UnityEditor;
 using UnityEditorInternal;
 using UnityEngine;
@@ -15,28 +16,31 @@ namespace Assets.Scripts.Editor
         private const float horizontalSpace = 5;
         private const float labelWidth = 50;
 
-        private ReorderableList list;
+        private Dictionary<uint, ReorderableList> objectMap = new Dictionary<uint, ReorderableList>();
         private SerializedProperty typesProp;
         private string[] ingredientNames;
 
         public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
         {
-            if (list == null)
+            ReorderableList list;
+            var key = property.contentHash;
+            if (!objectMap.ContainsKey(key) || objectMap[key] == null)
             {
-                Init(property);
+                list = Init(property);
+                objectMap[key] = list;
             }
-
-            if (list != null)
+            else
             {
+                list = objectMap[key];
                 list.DoLayoutList();
             }
         }
 
-        public void Init(SerializedProperty property)
+        public ReorderableList Init(SerializedProperty property)
         {
             typesProp = property.FindPropertyRelative("ingredients");
             UpdateIngredientNames();
-            list = new ReorderableList(property.serializedObject, property.FindPropertyRelative("items"), true, true, true, true);
+            ReorderableList list = new ReorderableList(property.serializedObject, property.FindPropertyRelative("items"), true, true, true, true);
             list.drawHeaderCallback = (Rect rect) =>
             {
                 EditorGUI.LabelField(rect, "Items");
@@ -69,6 +73,7 @@ namespace Assets.Scripts.Editor
                 EditorGUI.PropertyField(new Rect(countFieldX, rect.y, rect.width - countFieldX, EditorGUIUtility.singleLineHeight),
                     element.FindPropertyRelative("count"), GUIContent.none);
             };
+            return list;
 
         }
 
