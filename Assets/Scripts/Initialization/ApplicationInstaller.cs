@@ -3,7 +3,6 @@ using Assets.Scripts.Core.Output;
 using Assets.Scripts.Core.Repositories;
 using Assets.Scripts.Core.UseCases;
 using Assets.Scripts.Data.InMemory;
-using Assets.Scripts.Initialization.Commands;
 using Assets.Scripts.Presenters;
 using Assets.Scripts.Services;
 using Zenject;
@@ -29,7 +28,6 @@ namespace Assets.Scripts.Initialization
         {
             Container.BindInterfacesAndSelfTo<StorageLoader>().AsSingle();
             Container.BindInterfacesAndSelfTo<RepositoryInitializer>().AsSingle();
-            Container.BindInterfacesAndSelfTo<SceneBuilder>().AsSingle();
         }
 
         private void BindRepositories()

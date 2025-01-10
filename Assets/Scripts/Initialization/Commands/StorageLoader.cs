@@ -17,6 +17,8 @@ namespace Assets.Scripts
         {
             try
             {
+                System.Diagnostics.Stopwatch sw = new System.Diagnostics.Stopwatch();
+                sw.Start();
                 Debug.Log("Storage is initializing..");
                 ScriptableObjectLoader scriptableObjectLoader = new ScriptableObjectLoader();
                 await scriptableObjectLoader.Init();
@@ -24,7 +26,8 @@ namespace Assets.Scripts
                 Meals = await scriptableObjectLoader.Get<Meals>(false);
                 StartingIngredients = await scriptableObjectLoader.Get<StartingIngredients>();
                 StartingUserValues = await scriptableObjectLoader.Get<StartingUserValues>();
-                Debug.Log("Storage is initialized");
+                sw.Stop();
+                Debug.Log($"Storage is initialized, time = {TimeSpan.FromMilliseconds(sw.ElapsedMilliseconds)}");
                 return new InitializeResult(true, null);
             }
             catch (Exception ex)

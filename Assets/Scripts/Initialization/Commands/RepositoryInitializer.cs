@@ -22,13 +22,16 @@ namespace Assets.Scripts
         {
             try
             {
+                System.Diagnostics.Stopwatch sw = new System.Diagnostics.Stopwatch();
+                sw.Start();
                 Debug.Log("RepositoryInitializer is initializing..");
                 initialize.Execute(new InitializeRequest(
                     storageLoader.StartingUserValues.Money,
                     storageLoader.Ingredients.GetIngredientTypes(),
                     storageLoader.StartingIngredients.GetIngredients(),
                     storageLoader.Meals.GetRecipes()));
-                Debug.Log("RepositoryInitializer is initialized");
+                sw.Stop();
+                Debug.Log($"RepositoryInitializer is initialized, time = {TimeSpan.FromMilliseconds(sw.ElapsedMilliseconds)}");
                 return Task.FromResult(new InitializeResult(true, null));
             }
             catch (Exception ex)

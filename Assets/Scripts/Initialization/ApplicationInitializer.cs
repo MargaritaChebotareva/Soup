@@ -6,21 +6,31 @@ using Zenject;
 
 namespace Assets.Scripts.Initialization
 {
-    internal class ApplicationInitializer : IInitializeProgress, IInitializable
+    internal class ApplicationInitializer : IInitializeProgress, IInitializable, IInitializeStepModifier
     {
         public event Action Initialized;
         public event Action<string> InitializationFailed;
         public event Action<float> ProgressChanged;
         public event Action Initializing;
 
-        private readonly IEnumerable<IInitializeAsync> steps;
+        private readonly IList<IInitializeAsync> steps;
 
-        public ApplicationInitializer(IEnumerable<IInitializeAsync> steps)
+        public ApplicationInitializer(IEnumerable<IInitializeAsync> projectContextSteps)
         {
-            this.steps = steps;
+            steps = projectContextSteps.ToList();
         }
 
-        public async Task Initialize()
+        public void AddSceneContextStep(IInitializeAsync step)
+        {
+            steps.Add(step);
+        }
+
+        public async void Initialize()
+        {
+            await InitializeSteps();
+        }
+
+        private async Task InitializeSteps()
         {
             Initializing?.Invoke();
             int stepNumber = 0;
@@ -37,11 +47,6 @@ namespace Assets.Scripts.Initialization
                 ProgressChanged?.Invoke(stepNumber / count);
             }
             Initialized?.Invoke();
-        }
-
-        async void IInitializable.Initialize()
-        {
-            await Initialize();
         }
     }
 }

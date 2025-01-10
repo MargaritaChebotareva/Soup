@@ -14,15 +14,33 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ingredients: {fileID: 11400000, guid: 597ab1fa6de75894bbbe7bb081f43a95, type: 2}
   meals:
-  - name: Shark soup
-    price: 150
+  - name: FruitSalad
+    price: 30
     items:
       ingredients: {fileID: 11400000, guid: 597ab1fa6de75894bbbe7bb081f43a95, type: 2}
       items:
-      - name: Shark
-        count: 2
-      - name: Water
+      - name: Fish
         count: 1
-      - name: Salt
+      - name: Carrot
         count: 3
-    prefab: {fileID: 3171229147688852500, guid: fdbc59299e442ba458e0a9c911b96648, type: 3}
+      - name: Onion
+        count: 2
+      - name: Banana
+        count: 1
+    prefab: {fileID: 3807153341084587170, guid: 98063f8af2ca1e74a8f0d27b73798779, type: 3}
+  - name: FishWithVegetables
+    price: 30
+    items:
+      ingredients: {fileID: 11400000, guid: 597ab1fa6de75894bbbe7bb081f43a95, type: 2}
+      items:
+      - name: AppleGreen
+        count: 1
+      - name: AppleRed
+        count: 1
+      - name: AppleYellow
+        count: 1
+      - name: Banana
+        count: 1
+      - name: Watermelon
+        count: 1
+    prefab: {fileID: 3807153341084587170, guid: 98063f8af2ca1e74a8f0d27b73798779, type: 3}

@@ -13,12 +13,39 @@ MonoBehaviour:
   m_Name: Ingredients
   m_EditorClassIdentifier: 
   ingrediens:
-  - name: Shark
-    pricePerUnit: 100
-    prefab: {fileID: 8308443411728185501, guid: 862048c5d938d1745b6c78df4068bd3d, type: 3}
-  - name: Water
-    pricePerUnit: 1
-    prefab: {fileID: 1062059371481618893, guid: 55914286ea3e6114baa1ac412dc0a27d, type: 3}
-  - name: Salt
+  - name: AppleGreen
     pricePerUnit: 3
-    prefab: {fileID: 8026293421203052835, guid: 19afe249f4eab3342a3879599cf4d5a5, type: 3}
+    prefab: {fileID: 5845764101742897756, guid: d9de68abf0ec083479f4ed74f73dbc32, type: 3}
+  - name: AppleRed
+    pricePerUnit: 3
+    prefab: {fileID: -3047689969485635360, guid: 0cff5602180178b40b626d9457308c22, type: 3}
+  - name: AppleYellow
+    pricePerUnit: 3
+    prefab: {fileID: 8598424494457004028, guid: d1a2578120297ba46bff81c9ccdced57, type: 3}
+  - name: Banana
+    pricePerUnit: 5
+    prefab: {fileID: 2899886993554094117, guid: a463b69274d64874586b7d4bf7ca4b74, type: 3}
+  - name: Beet
+    pricePerUnit: 5
+    prefab: {fileID: 923325934558147506, guid: 08644a32807dbcb4984fd8acc836ed90, type: 3}
+  - name: BigMeat
+    pricePerUnit: 25
+    prefab: {fileID: -8250858876775877074, guid: e3fde7683af9e6b46b35ca27354c880a, type: 3}
+  - name: Carrot
+    pricePerUnit: 5
+    prefab: {fileID: -5395276781912108570, guid: 6d72194cd868a574ab6d5bf61fcf329c, type: 3}
+  - name: Cucumber
+    pricePerUnit: 5
+    prefab: {fileID: -6295633478018317008, guid: c6364c2639215814a9ca3da9276b4d73, type: 3}
+  - name: Fish
+    pricePerUnit: 10
+    prefab: {fileID: -2850965212977542519, guid: 6bc94c830d0834046b753315101c5f49, type: 3}
+  - name: Onion
+    pricePerUnit: 5
+    prefab: {fileID: -3710132862430112747, guid: 027473e7855a5f947813aee200c61882, type: 3}
+  - name: Tomato
+    pricePerUnit: 5
+    prefab: {fileID: 127904320336716345, guid: e89593939b268cd45b3f83421e6059ab, type: 3}
+  - name: Watermelon
+    pricePerUnit: 5
+    prefab: {fileID: 4993450465178698278, guid: d01737fc944df8541be36f389781531c, type: 3}

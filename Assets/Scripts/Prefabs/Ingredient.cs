@@ -33,7 +33,7 @@ namespace Assets.Scripts.Prefabs
 
         public void SetAsUser()
         {
-            transform.position = new Vector3(1, 0, 0);
+            gameObject.SetActive(false);
         }
 
         public void SetAsNone()

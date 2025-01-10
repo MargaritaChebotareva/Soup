@@ -7,6 +7,7 @@ using Assets.Scripts.Controllers;
 using Assets.Scripts.Prefabs;
 using Assets.Scripts.Services;
 using Assets.Scripts.Core.UseCases.Responses;
+using System.Linq;
 
 namespace Assets.Scripts.Initialization.Commands
 {
@@ -14,19 +15,22 @@ namespace Assets.Scripts.Initialization.Commands
     {
         private Dictionary<string, Meal> mealPrefabs = new();
         private Dictionary<string, Ingredient> ingredientPrefabs = new();
-        private Dictionary<int, Ingredient> ingredientMap = new();
+        private Dictionary<int, Ingredient> ingredientObjects = new();
 
         private readonly StorageLoader storageLoader;
         private readonly IngredientFacade ingredientFacade;
         private readonly MealFacade mealFacade;
         private readonly IngredientController ingredientController;
         private readonly DiContainer container;
+        private readonly ItemScatterer itemScatterer;
         public SceneBuilder(
             DiContainer container, 
             StorageLoader storageLoader,
             IngredientFacade ingredientFacade,
             MealFacade mealFacade, 
-            IngredientController ingredientController
+            IngredientController ingredientController,
+            ItemScatterer itemScatterer,
+        IInitializeStepModifier stepModifier
         ) {
             this.container = container;
             this.storageLoader = storageLoader;
@@ -34,22 +38,28 @@ namespace Assets.Scripts.Initialization.Commands
             this.mealFacade = mealFacade;
             this.ingredientController = ingredientController;
             ingredientController.OnBoughtIngredient += OnBoughtIngredient;
+            this.itemScatterer = itemScatterer;
+            stepModifier.AddSceneContextStep(this);
         }
 
         public Task<InitializeResult> Initialize()
         {
             try
             {
+                System.Diagnostics.Stopwatch sw = new System.Diagnostics.Stopwatch();
+                sw.Start();
                 Debug.Log("SceneBuilder is initializing a scene..");
                 var ingredients = ingredientFacade.GetIngredients();
                 var meals = mealFacade.GetMeals();
 
                 SetupPrefabMaps();
-                var container = UnityEngine.SceneManagement.SceneManager.GetActiveScene().GetRootGameObjects()[0].transform;
+
+                var container = itemScatterer.transform;
                 CreateIngredients(ingredients, container);
                 CreateMeals(meals, container);
-                
-                Debug.Log("SceneBuilder initialized scene");
+                itemScatterer.Scatter(ingredientObjects);
+                sw.Stop();
+                Debug.Log($"SceneBuilder initialized scene, time = {TimeSpan.FromMilliseconds(sw.ElapsedMilliseconds)}");
                 return Task.FromResult(new InitializeResult(true, null));
             }
             catch (Exception ex)
@@ -61,7 +71,7 @@ namespace Assets.Scripts.Initialization.Commands
         private void OnBoughtIngredient(BuyIngredientResponse response)
         {
             if (!response.IsSuccess) return;
-            var ingredient = ingredientMap[response.Ingredient.Id];
+            var ingredient = ingredientObjects[response.Ingredient.Id];
             ingredient.SetAsUser();
 
         }
@@ -77,6 +87,7 @@ namespace Assets.Scripts.Initialization.Commands
                 ingredientPrefabs.Add(item.Name, item.Prefab);
             }
         }
+
         private void CreateIngredients(Core.Entities.Ingredient[] ingredientsInput, Transform container)
         {
             for (int i = 0; i < ingredientsInput.Length; i++)
@@ -92,7 +103,7 @@ namespace Assets.Scripts.Initialization.Commands
                     ingredient.SetAsNone();
                 }
                 ingredient.Init(ingredientsInput[i].Id);
-                ingredientMap.Add(ingredientsInput[i].Id, ingredient);
+                ingredientObjects.Add(ingredientsInput[i].Id, ingredient);
             }
         }
         private void CreateMeals(Core.Entities.Meal[] mealsInput, Transform container)
@@ -104,15 +115,18 @@ namespace Assets.Scripts.Initialization.Commands
         }
         private Meal Create(Core.Entities.Meal meal, Vector3 position, Quaternion rotation, Transform transform)
         {
-            var mealComponent = container.InstantiatePrefab(mealPrefabs[meal.Name], position, rotation, transform).GetComponent<Prefabs.Meal>();
+            var mealComponent = container.InstantiatePrefab(mealPrefabs[meal.Name], position, rotation, transform).GetComponent<Meal>();
             mealComponent.Init(meal.Id);
             return mealComponent;
         }
         private Ingredient Create(Core.Entities.Ingredient ingredient, Vector3 position, Quaternion rotation, Transform transform)
         {
-            var ingredientComponent = container.InstantiatePrefab(ingredientPrefabs[ingredient.Name], position, rotation, transform).GetComponent<Prefabs.Ingredient>();
+            var ingredientComponent = container.InstantiatePrefab(ingredientPrefabs[ingredient.Name], position, rotation, transform).GetComponent<Ingredient>();
             ingredientComponent.Init(ingredient.Id);
+            ingredientComponent.gameObject.SetActive(false);
             return ingredientComponent;
         }
     }
+
+
 }
