@@ -21,7 +21,7 @@ namespace Assets.Scripts.Initialization
 
         private void OnInitializationFailed(string error)
         {
-            Debug.Log($"Application is failed, error: {error}");
+            Debug.LogError($"Application is failed, error: {error}");
         }
 
         private void OnProgressChanged(float value)

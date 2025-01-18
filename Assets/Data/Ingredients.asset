@@ -46,6 +46,9 @@ MonoBehaviour:
   - name: Tomato
     pricePerUnit: 5
     prefab: {fileID: 127904320336716345, guid: e89593939b268cd45b3f83421e6059ab, type: 3}
+  - name: Potato
+    pricePerUnit: 5
+    prefab: {fileID: 4604322040103744993, guid: e114f4643130e0a4181f1aa1ce0f0485, type: 3}
   - name: Watermelon
     pricePerUnit: 5
     prefab: {fileID: 4993450465178698278, guid: d01737fc944df8541be36f389781531c, type: 3}

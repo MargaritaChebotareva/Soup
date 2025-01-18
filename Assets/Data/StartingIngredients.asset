@@ -17,26 +17,28 @@ MonoBehaviour:
     ingredients: {fileID: 11400000, guid: 597ab1fa6de75894bbbe7bb081f43a95, type: 2}
     items:
     - name: Banana
-      count: 5
+      count: 10
     - name: AppleGreen
-      count: 5
+      count: 10
     - name: AppleRed
-      count: 5
+      count: 10
     - name: AppleYellow
-      count: 5
+      count: 10
     - name: Beet
-      count: 5
+      count: 10
     - name: BigMeat
       count: 5
     - name: Carrot
-      count: 5
+      count: 10
     - name: Cucumber
-      count: 5
+      count: 10
     - name: Fish
       count: 5
     - name: Onion
-      count: 5
+      count: 10
     - name: Tomato
-      count: 5
+      count: 10
     - name: Watermelon
-      count: 5
+      count: 10
+    - name: Potato
+      count: 10

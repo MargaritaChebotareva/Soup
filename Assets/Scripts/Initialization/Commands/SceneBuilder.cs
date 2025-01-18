@@ -7,7 +7,7 @@ using Assets.Scripts.Controllers;
 using Assets.Scripts.Prefabs;
 using Assets.Scripts.Services;
 using Assets.Scripts.Core.UseCases.Responses;
-using System.Linq;
+using Assets.Scripts.Services.Scatterer;
 
 namespace Assets.Scripts.Initialization.Commands
 {
