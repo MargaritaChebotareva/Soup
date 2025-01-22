@@ -9,7 +9,7 @@ namespace Assets.Scripts.Initialization
     internal class ApplicationInitializer : IInitializeProgress, IInitializable, IInitializeStepModifier
     {
         public event Action Initialized;
-        public event Action<string> InitializationFailed;
+        public event Action<Exception> InitializationFailed;
         public event Action<float> ProgressChanged;
         public event Action Initializing;
 

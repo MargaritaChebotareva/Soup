@@ -32,7 +32,7 @@ namespace Assets.Scripts
             }
             catch (Exception ex)
             {
-                return new InitializeResult(false, ex.Message);
+                return new InitializeResult(false, ex);
             }
         }
     }

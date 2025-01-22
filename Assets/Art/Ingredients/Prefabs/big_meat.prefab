@@ -162,4 +162,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a65daf270d6a4774a89565abc86d7278, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  yAxisRotation: 90
   <TagChain>k__BackingField: {fileID: 11400000, guid: bf29c3ede76e73e44a2526b6f44d0c7b, type: 2}

@@ -7,6 +7,7 @@ namespace Assets.Scripts.Services.Scatterer
     public class ScatteredItem : MonoBehaviour
     {
         private Rigidbody rb;
+        [SerializeField] private float yAxisRotation = 0;
         [field: SerializeField] public TagChain TagChain { get; private set; }
 
         private void Awake()
@@ -28,7 +29,7 @@ namespace Assets.Scripts.Services.Scatterer
             rb.isKinematic = false;
             gameObject.SetActive(true);
             rb.MovePosition(startPoint);
-            rb.MoveRotation(Random.rotationUniform);
+            rb.MoveRotation(Quaternion.AngleAxis(yAxisRotation, Vector3.up));
         }
     }
 }

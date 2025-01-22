@@ -1,10 +1,12 @@
-﻿namespace Assets.Scripts.Initialization
+﻿using System;
+
+namespace Assets.Scripts.Initialization
 {
     public struct InitializeResult
     {
         public bool IsSuccess { get; private set; }
-        public string Error { get; private set; }
-        public InitializeResult(bool isSuccess, string error)
+        public Exception Error { get; private set; }
+        public InitializeResult(bool isSuccess, Exception error)
         {
             IsSuccess = isSuccess;
             Error = error;

@@ -6,7 +6,7 @@ namespace Assets.Scripts.Initialization
     {
         event Action Initializing;
         event Action Initialized;
-        event Action<string> InitializationFailed;
+        event Action<Exception> InitializationFailed;
         event Action<float> ProgressChanged;
     }
 }

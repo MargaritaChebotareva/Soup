@@ -36,7 +36,7 @@ namespace Assets.Scripts
             }
             catch (Exception ex)
             {
-                return Task.FromResult(new InitializeResult(false, ex.Message));
+                return Task.FromResult(new InitializeResult(false, ex));
             }
         }
     }

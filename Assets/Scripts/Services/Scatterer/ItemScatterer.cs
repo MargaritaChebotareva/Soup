@@ -8,7 +8,7 @@ namespace Assets.Scripts.Services.Scatterer
     public class ItemScatterer : MonoBehaviour
     {
         [SerializeField] private ScatteredVolume[] volumes;
-        [SerializeField] private bool withUpdate = false;
+        [SerializeField] private bool byFrame = false;
         private Dictionary<int, Ingredient> ingredientObjects;
 
         public void Scatter(Dictionary<int, Ingredient> ingredientObjects)
@@ -41,7 +41,7 @@ namespace Assets.Scripts.Services.Scatterer
 
             for (int i = 0; i < volumes.Length; i++)
             {
-                volumes[i].ScatterItem(withUpdate);
+                volumes[i].ScatterItem(byFrame);
             }
 
             sw.Stop();

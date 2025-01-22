@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 namespace Assets.Scripts.Initialization
 {
@@ -19,7 +20,7 @@ namespace Assets.Scripts.Initialization
             Debug.Log($"Application is initialized!");
         }
 
-        private void OnInitializationFailed(string error)
+        private void OnInitializationFailed(Exception error)
         {
             Debug.LogError($"Application is failed, error: {error}");
         }

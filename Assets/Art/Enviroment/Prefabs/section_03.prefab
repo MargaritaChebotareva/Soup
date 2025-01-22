@@ -349,8 +349,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tagChains: []
   padding: 0.1
-  lenght: 5
-  width: 1
+  columns: 5
+  rows: 1
+  isSeparatedByRows: 0
+  isSeparatedByColumns: 0
   <Capacity>k__BackingField: 10
 --- !u!1 &8404758169271765101
 GameObject:
